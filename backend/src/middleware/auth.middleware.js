@@ -8,13 +8,11 @@ export async function protectRoute(req, res, next) {
       res.status(401).json({message: "Unauthorized"});
       return;
     }
-    
     const user = await User.findOne({clerkId:userId});
     if (!user) {
       res.status(404).json({message:"user Profile not Synced yet"});
       return;
     }
-    
     req.user = user;
     next()
   } catch (error) {

@@ -12,6 +12,7 @@ import job from './lib/cron.js'
 import clerkWebhook from './webhooks/clerk.webhook.js'
 import User from './models/user.model.js';
 import authRoutes from './routes/auth.route.js'
+import messageRoutes from './routes/message.route.js'
 
 const publicDir = path.join(process.cwd(), "public");
 const app = express();
@@ -20,6 +21,7 @@ const FRONTEND_URL = process.env.FRONTEND_URL
 
 app.use("/api/webhooks/clerk", express.raw({ type: "application/json" }), clerkWebhook);
 app.use("/api/auth", authRoutes);
+app.use("/api/messages", messageRoutes);
 
 app.use(express.json());
 app.use(cors({
