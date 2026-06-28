@@ -1,0 +1,20 @@
+/**
+ * iMessage / iOS system font stack. SF Pro isn't web-licensed for general
+ * distribution, so we lean on `-apple-system`/`system-ui` to resolve to San
+ * Francisco on Apple devices, with a close-matching fallback chain elsewhere.
+ */
+@layer base {
+  :root {
+    --font-sans:
+      -apple-system, "SF Pro Text", "SF Pro Display", system-ui, "Segoe UI", Roboto, Helvetica,
+      Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    --font-mono:
+      "SF Mono", ui-monospace, "Menlo", "Cascadia Code", Consolas, monospace;
+  }
+
+  html {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+}

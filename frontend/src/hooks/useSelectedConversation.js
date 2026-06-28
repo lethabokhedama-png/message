@@ -18,7 +18,7 @@ export function getInitials(name) {
 // 1. Messages → UI messages
 // 2. User → peer
 
-function mapUserToConversation({ user, messages, authUser, onlineUsers }) {
+function mapUserToConversation({ user, messages, authUser, onlineUsers, lastSeenAt }) {
   const mappedMessages = messages.map((message) => ({
     id: message._id,
     role: String(message.senderId) === String(authUser?._id) ? "me" : "them",
@@ -28,12 +28,17 @@ function mapUserToConversation({ user, messages, authUser, onlineUsers }) {
     videoUrl: message.video,
   }));
 
+  const isOnline = onlineUsers.includes(user._id);
+
   return {
     id: user._id,
     peer: {
       name: user.fullName,
       subtitle: user.email,
-      isOnline: onlineUsers.includes(user._id),
+      isOnline,
+      // Prefer a real backend `lastSeen` field once it exists; fall back to
+      // the frontend-derived timestamp captured at the moment they went offline.
+      lastSeenAt: user.lastSeen ?? lastSeenAt[user._id] ?? null,
       avatarUrl: user.profilePic,
       initials: getInitials(user.fullName),
     },
@@ -49,6 +54,7 @@ export function useSelectedConversation() {
 
   const authUser = useAuthStore((state) => state.authUser);
   const onlineUsers = useAuthStore((state) => state.onlineUsers);
+  const lastSeenAt = useAuthStore((state) => state.lastSeenAt);
 
   const isLargeScreen = useMediaQuery("(min-width: 1024px)");
 
@@ -58,7 +64,7 @@ export function useSelectedConversation() {
     : null;
 
   const activeConversation = selectedUser
-    ? mapUserToConversation({ user: selectedUser, messages, authUser, onlineUsers })
+    ? mapUserToConversation({ user: selectedUser, messages, authUser, onlineUsers, lastSeenAt })
     : null;
 
   return {

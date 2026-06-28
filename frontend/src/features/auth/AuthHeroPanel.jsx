@@ -1,4 +1,4 @@
-import { APP_NAME } from "../AppLogo";
+import { APP_NAME } from "../../ui/AppLogo";
 import { AuthHeroPattern } from "./AuthHeroPattern";
 
 const heroPanelClassName = [

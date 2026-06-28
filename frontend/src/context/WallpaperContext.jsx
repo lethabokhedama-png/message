@@ -1,13 +1,21 @@
-import { useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { frameStyleFromUrl, getWallpaperById } from "../data/wallpapers";
-import { WallpaperContext } from "./wallpaper";
+
+const WallpaperContext = createContext(null);
 
 const STORAGE_KEY = "chat-wallpaper-id";
+
+export function useWallpaper() {
+  const ctx = useContext(WallpaperContext);
+  if (!ctx) {
+    throw new Error("useWallpaper must be used within WallpaperProvider");
+  }
+  return ctx;
+}
 
 function readStoredWallpaperId() {
   const wallpaperId = localStorage.getItem(STORAGE_KEY);
   if (wallpaperId) return wallpaperId;
-
   return "sonoma-horizon";
 }
 

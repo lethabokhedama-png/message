@@ -1,7 +1,7 @@
 import { Button, Modal, useOverlayState } from "@heroui/react";
 import { Check, ImageIcon } from "lucide-react";
 import { useTransition } from "react";
-import { useWallpaper } from "../context/wallpaper";
+import { useWallpaper } from "../context/WallpaperContext";
 import { WALLPAPER_SECTIONS, WALLPAPERS } from "../data/wallpapers";
 
 function WallpaperThumb({ wallpaper, selected, onSelect }) {
@@ -10,7 +10,8 @@ function WallpaperThumb({ wallpaper, selected, onSelect }) {
       type="button"
       onClick={() => onSelect(wallpaper.id)}
       className={[
-        "relative aspect-4/3 w-full overflow-hidden rounded-xl bg-zinc-900 contain-[layout]",
+        "pressable relative aspect-4/3 w-full overflow-hidden rounded-[var(--radius-tile)] bg-zinc-900 contain-[layout]",
+        "transition-[outline-color] duration-[var(--duration-base)]",
         selected
           ? "outline-2 outline-offset-2 outline-white"
           : "outline-1 outline-transparent hover:outline-white/45",
@@ -35,7 +36,7 @@ function WallpaperThumb({ wallpaper, selected, onSelect }) {
         {wallpaper.label}
       </span>
       {selected ? (
-        <span className="absolute right-1.5 top-1.5 z-10 flex size-6 items-center justify-center rounded-full bg-white text-[#1a1a1c] shadow-md">
+        <span className="animate-bubble-pop absolute right-1.5 top-1.5 z-10 flex size-6 items-center justify-center rounded-full bg-white text-[#1a1a1c] shadow-md">
           <Check className="size-3.5" strokeWidth={3} />
         </span>
       ) : null}
@@ -58,19 +59,19 @@ export function WallpaperPicker() {
   return (
     <Modal.Root state={modal}>
       <Modal.Trigger>
-        <Button variant="ghost" size="sm" isIconOnly className="text-foreground">
+        <Button variant="ghost" size="sm" isIconOnly className="pressable text-foreground">
           <ImageIcon className="size-5" />
         </Button>
       </Modal.Trigger>
 
-      <Modal.Backdrop variant="opaque">
+      <Modal.Backdrop variant="opaque" className="animate-backdrop-in">
         <Modal.Container size="lg" scroll="inside" placement="center">
-          <Modal.Dialog className="max-h-[85dvh] border border-white/10 bg-[#2a2a2c] text-foreground shadow-2xl">
+          <Modal.Dialog className="animate-sheet-up max-h-[85dvh] rounded-[var(--radius-sheet)] border border-white/10 bg-[#2a2a2c] text-foreground shadow-2xl">
             <Modal.Header className="flex flex-row items-center justify-between gap-3 border-b border-white/10 pb-3">
               <Modal.Heading className="text-lg font-semibold tracking-tight text-white">
                 Backdrop
               </Modal.Heading>
-              <Modal.CloseTrigger />
+              <Modal.CloseTrigger className="pressable" />
             </Modal.Header>
 
             <Modal.Body className="isolate space-y-8 pt-4">

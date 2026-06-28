@@ -1,6 +1,10 @@
 /**
  * HeroUI accent presets — override `--accent` / `--accent-foreground` for light & dark
  * while keeping `data-theme` as light | dark. Applied via `data-theme-preset` on <html>.
+ *
+ * Color only. Shape + motion personality per preset lives in motion-tokens.css —
+ * keeping these concerns in separate files means either can be swapped without
+ * touching the other.
  */
 @layer base {
   /* --- Sky --- */

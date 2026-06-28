@@ -1,23 +1,24 @@
 import { useClerk } from "@clerk/react";
 import { Button } from "@heroui/react";
 import { ArrowRightIcon, ShieldCheckIcon, SparklesIcon } from "lucide-react";
-import { AppLogo } from "../AppLogo";
+import { AppLogo } from "../../ui/AppLogo";
 import { AuthCardShell } from "./AuthCardShell";
 
 const AFTER_AUTH = "/";
 
 const logoTileClassName = [
-  "relative rounded-2xl bg-linear-to-b from-white to-[#f2f2f7] p-2",
+  "relative rounded-[var(--radius-tile)] bg-linear-to-b from-white to-[#f2f2f7] p-2",
   "shadow-lg shadow-black/8 ring-1 ring-black/8",
   "dark:from-[#2c2c2e] dark:to-[#1a1a1c] dark:shadow-black/50 dark:ring-white/12",
 ].join(" ");
 
 const continueButtonClassName = [
-  "group relative h-13 overflow-hidden rounded-2xl text-[15px] font-semibold",
+  "pressable group relative h-13 overflow-hidden rounded-[var(--radius-card)] text-[15px] font-semibold",
   "shadow-xl shadow-accent/45 dark:shadow-accent/35",
-  "after:pointer-events-none after:absolute after:inset-0 after:rounded-2xl",
+  "after:pointer-events-none after:absolute after:inset-0 after:rounded-[var(--radius-card)]",
   "after:shadow-[inset_0_1px_0_rgba(255,255,255,0.25)]",
   "dark:after:shadow-[inset_0_1px_0_rgba(255,255,255,0.15)]",
+  "transition-shadow duration-[var(--duration-base)] ease-[var(--ease-spring)]",
 ].join(" ");
 
 export function AuthActionPanel() {
@@ -30,10 +31,10 @@ export function AuthActionPanel() {
           <div className="relative mb-5">
             <div
               aria-hidden
-              className="absolute -inset-3.5 rounded-[20px] bg-linear-to-br from-accent/22 via-accent/8 to-transparent opacity-90 blur-xl dark:from-accent/28 dark:via-accent/10"
+              className="absolute -inset-3.5 rounded-[calc(var(--radius-tile)+0.5rem)] bg-linear-to-br from-accent/22 via-accent/8 to-transparent opacity-90 blur-xl dark:from-accent/28 dark:via-accent/10"
             />
             <div className={logoTileClassName}>
-              <AppLogo size={52} className="rounded-xl" alt="" />
+              <AppLogo size={52} className="rounded-[var(--radius-tile)]" alt="" />
             </div>
           </div>
 
@@ -58,7 +59,7 @@ export function AuthActionPanel() {
             <span className="relative z-1 flex items-center justify-center gap-2">
               Continue
               <ArrowRightIcon
-                className="size-4 transition-transform group-hover:translate-x-0.5"
+                className="size-4 transition-transform duration-[var(--duration-base)] group-hover:translate-x-0.5"
                 aria-hidden
               />
             </span>

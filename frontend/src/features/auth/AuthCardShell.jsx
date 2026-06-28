@@ -1,5 +1,5 @@
 const cardClassName = [
-  "relative overflow-hidden rounded-[1.75rem]",
+  "relative overflow-hidden rounded-[var(--radius-sheet)]",
   "border border-black/8 bg-white/75 backdrop-blur-2xl",
   "shadow-[0_32px_90px_-24px_rgba(0,0,0,0.18),0_0_1px_rgba(0,0,0,0.06)]",
   "dark:border-white/12 dark:bg-[#141416]/82",
@@ -8,15 +8,15 @@ const cardClassName = [
 
 export function AuthCardShell({ children }) {
   return (
-    <div className="relative z-10 mx-auto w-full max-w-105">
+    <div className="animate-fade-in-up relative z-10 mx-auto w-full max-w-105">
       <div className="relative">
         <div
           aria-hidden
-          className="pointer-events-none absolute -inset-px rounded-[1.85rem] bg-linear-to-b from-white/70 via-white/15 to-transparent opacity-80 dark:from-white/15 dark:via-white/5 dark:opacity-100"
+          className="pointer-events-none absolute -inset-px rounded-[calc(var(--radius-sheet)+0.1rem)] bg-linear-to-b from-white/70 via-white/15 to-transparent opacity-80 dark:from-white/15 dark:via-white/5 dark:opacity-100"
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 rounded-[1.8rem] shadow-[0_0_0_1px_rgba(255,255,255,0.55)_inset] dark:shadow-[0_0_0_1px_rgba(255,255,255,0.08)_inset]"
+          className="pointer-events-none absolute inset-0 rounded-[var(--radius-sheet)] shadow-[0_0_0_1px_rgba(255,255,255,0.55)_inset] dark:shadow-[0_0_0_1px_rgba(255,255,255,0.08)_inset]"
         />
 
         <div className={cardClassName}>

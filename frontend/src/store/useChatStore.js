@@ -11,13 +11,21 @@ export const useChatStore = create(
       users: [],
       conversations: [],
       messages: [],
+
+      // Groups has no backend endpoint yet — kept as an explicit empty array
+      // (not undefined) so the Groups tab renders a real "no groups yet" empty
+      // state instead of erroring. Wire `getGroups()` up to a real endpoint
+      // once the backend supports it; the UI is already built to consume it.
+      groups: [],
+      isGroupsLoading: false,
+
       selectedUser: null,
       isConversationsLoading: false,
       isUsersLoading: false,
       isMessagesLoading: false,
       activeConversationId: null,
       searchQuery: "",
-      sidebarTab: "chats",
+      sidebarTab: "chats", // "chats" | "groups" | "settings"
       composerText: "",
       isSoundEnabled: true,
       isSendingMedia: false,
@@ -49,6 +57,16 @@ export const useChatStore = create(
           console.log("Error in getConversations", error.message);
         } finally {
           set({ isConversationsLoading: false });
+        }
+      },
+
+      // Placeholder until a backend group-conversations endpoint exists.
+      getGroups: async () => {
+        set({ isGroupsLoading: true });
+        try {
+          set({ groups: [] });
+        } finally {
+          set({ isGroupsLoading: false });
         }
       },
 
@@ -142,7 +160,7 @@ export const useChatStore = create(
       },
     }),
     {
-      name: "imessage-storage",
+      name: "messenger-storage",
       partialize: (state) => ({ isSoundEnabled: state.isSoundEnabled }),
     },
   ),

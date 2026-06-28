@@ -1,6 +1,9 @@
 @import "tailwindcss";
 @import "@heroui/styles";
+@import "./styles/fonts.css";
 @import "./styles/heroui-theme-presets.css";
+@import "./styles/motion-tokens.css";
+@import "./styles/motion-keyframes.css";
 
 /* HeroUI's dark fallback uses prefers-color-scheme but forgot [data-theme="light"], so OS dark +
    app light still applied dark: utilities. Re-define so explicit light theme wins system dark. */
@@ -33,6 +36,32 @@
         @slot;
       }
     }
+  }
+}
+
+@layer base {
+  html,
+  body {
+    /* iOS-style rubber-band overscroll instead of the browser default bounce-bar */
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Thin, iOS-like scrollbars on devices that show them (desktop browsers) */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in oklch, currentColor 22%, transparent) transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: color-mix(in oklch, currentColor 22%, transparent);
+    border-radius: var(--radius-pill);
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
   }
 }
 

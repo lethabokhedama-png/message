@@ -1,0 +1,111 @@
+/**
+ * Shared keyframes for iOS-feel motion: sheet presentation, bubble pop-in,
+ * sidebar/chat slide transitions, shimmer for loading states.
+ * Durations/easing are pulled from motion-tokens.css so they respect the
+ * active theme preset's motion character.
+ */
+@layer base {
+  @keyframes sheet-up {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes sheet-down {
+    from {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(12%);
+      opacity: 0;
+    }
+  }
+
+  @keyframes backdrop-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes bubble-pop {
+    from {
+      opacity: 0;
+      transform: scale(0.86) translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  @keyframes slide-in-right {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slide-in-left {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes pulse-dot {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 color-mix(in oklch, var(--success) 55%, transparent);
+    }
+    50% {
+      box-shadow: 0 0 0 4px color-mix(in oklch, var(--success) 0%, transparent);
+    }
+  }
+
+  @keyframes nav-indicator-slide {
+    from {
+      opacity: 0.4;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .animate-sheet-up {
+    animation: sheet-up var(--duration-slow) var(--ease-spring) both;
+  }
+  .animate-backdrop-in {
+    animation: backdrop-in var(--duration-base) var(--ease-smooth) both;
+  }
+  .animate-bubble-pop {
+    animation: bubble-pop var(--duration-base) var(--ease-spring) both;
+  }
+  .animate-fade-in-up {
+    animation: fade-in-up var(--duration-base) var(--ease-smooth) both;
+  }
+  .animate-pulse-dot {
+    animation: pulse-dot 2.2s var(--ease-smooth) infinite;
+  }
+}

@@ -12,7 +12,7 @@ export function MessageBubble({ message }) {
   return (
     <div className={`flex w-full ${isOwnMessage ? "justify-end" : "justify-start"}`}>
       <div
-        className={`max-w-[min(90%,28rem)] rounded-2xl px-3 py-2 text-[15px] leading-snug sm:max-w-[min(75%,28rem)] sm:px-3.5 ${
+        className={`animate-bubble-pop max-w-[min(90%,28rem)] rounded-[var(--radius-bubble)] px-3 py-2 text-[15px] leading-snug sm:max-w-[min(75%,28rem)] sm:px-3.5 ${
           isOwnMessage
             ? "rounded-br-md bg-accent text-accent-foreground"
             : "rounded-bl-md bg-surface"
@@ -22,7 +22,7 @@ export function MessageBubble({ message }) {
           <img
             src={withTransform(message.imageUrl, IMAGE_TRANSFORM)}
             alt=""
-            className="mb-1.5 max-h-40 max-w-full rounded-lg object-cover sm:max-h-52 sm:rounded-xl"
+            className="mb-1.5 max-h-40 max-w-full rounded-[calc(var(--radius-bubble)*0.7)] object-cover sm:max-h-52"
           />
         ) : null}
         {hasVideo ? <MessageVideo src={message.videoUrl} /> : null}

@@ -10,6 +10,12 @@ export const useAuthStore = create((set, get) => ({
   onlineUsers: [],
   socket: null,
 
+  // userId -> ISO timestamp of when they were last seen online.
+  // This is a frontend-derived fallback: it's set the moment a user drops out of
+  // `onlineUsers`. Once the backend sends a real `lastSeen` field on the user
+  // document, prefer that value over this map (see features/presence).
+  lastSeenAt: {},
+
   checkAuth: async () => {
     set({ isCheckingAuth: true });
 
@@ -39,6 +45,19 @@ export const useAuthStore = create((set, get) => ({
     set({ socket });
 
     socket.on("getOnlineUsers", (userIds) => {
+      const previousOnline = get().onlineUsers;
+      const droppedOff = previousOnline.filter((id) => !userIds.includes(id));
+
+      if (droppedOff.length > 0) {
+        const now = new Date().toISOString();
+        set((state) => ({
+          lastSeenAt: {
+            ...state.lastSeenAt,
+            ...Object.fromEntries(droppedOff.map((id) => [id, now])),
+          },
+        }));
+      }
+
       set({ onlineUsers: userIds });
     });
   },
