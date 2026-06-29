@@ -9,7 +9,8 @@ export function ConversationRow({ user, selected, onSelect }) {
     <button
       type="button"
       onClick={onSelect}
-      className={`pressable flex w-full items-center gap-3 border-b border-border px-3 py-2.5 text-left transition-colors duration-[var(--duration-fast)] ${
+      style={{ paddingTop: "var(--row-padding-y)", paddingBottom: "var(--row-padding-y)" }}
+      className={`pressable flex w-full items-center gap-3 border-b border-border px-3 text-left transition-colors duration-[var(--duration-fast)] ${
         selected ? "bg-accent-soft" : ""
       }`}
     >

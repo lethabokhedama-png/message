@@ -10,7 +10,9 @@ const TABS = [
  * Mobile-only bottom tab bar (Instagram/iOS Messages style). Hidden at the
  * `isLargeScreen` breakpoint where the sidebar takes over navigation.
  * The active tab's icon+label scale up slightly and the indicator bar
- * slides under it — pure CSS transform, no layout shift.
+ * slides under it — pure CSS transform, no layout shift. Rendered both
+ * inside ChatSidebar (chats/groups) and on SettingsPage, so the active
+ * highlight stays correct regardless of which route you're actually on.
  */
 export function BottomNav({ activeTab, onTabChange }) {
   const activeIndex = TABS.findIndex((tab) => tab.id === activeTab);

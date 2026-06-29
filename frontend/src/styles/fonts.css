@@ -14,6 +14,7 @@
 
   html {
     font-family: var(--font-sans);
+    font-size: calc(100% * var(--text-scale, 1));
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }

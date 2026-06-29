@@ -167,3 +167,29 @@
     }
   }
 }
+
+/**
+ * User-customizable settings (Settings page > Appearance > Customize).
+ * --text-scale is set inline on <html> by CustomizationContext; density and
+ * bubble-style are data attributes. These live separately from the preset
+ * shape/motion tokens above because they're independently user-controlled,
+ * not tied to the accent preset.
+ */
+@layer base {
+  :root {
+    --text-scale: 1;
+    --message-gap: 0.25rem;
+    --row-padding-y: 0.625rem;
+  }
+
+  html[data-density="compact"] {
+    --message-gap: 0.0625rem;
+    --row-padding-y: 0.375rem;
+  }
+
+  /* Sharp bubble style overrides the preset's bubble radius down to a small,
+     near-square corner regardless of which accent preset is active. */
+  html[data-bubble-style="sharp"] {
+    --radius-bubble: 0.375rem;
+  }
+}
