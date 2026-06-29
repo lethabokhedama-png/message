@@ -3,7 +3,6 @@ import { useAuthStore } from "../../store/useAuthStore";
 import { useChatStore } from "../../store/useChatStore";
 import { APP_NAME, AppLogo } from "../../ui/AppLogo";
 import { UserButton } from "@clerk/react";
-import { useNavigate } from "react-router";
 import { SearchField } from "@heroui/react";
 import { UsersIcon } from "lucide-react";
 import { ConversationRow } from "./ConversationRow";

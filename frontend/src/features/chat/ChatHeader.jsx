@@ -5,7 +5,6 @@ import { AvatarWithPresence } from "../presence/AvatarWithPresence";
 import { useLastSeen } from "../presence/useLastSeen";
 import { useChatStore } from "../../store/useChatStore";
 import { useSelectedConversation } from "../../hooks/useSelectedConversation";
-import { useNavigate } from "react-router";
 import { useNavigate } from 'react-router-dom';
 
 export function ChatHeader() {
